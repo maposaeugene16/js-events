@@ -1,6 +1,7 @@
 export const COMPANY_INFO = {
   name: "JS Events",
-  tagline: "Premier Decor, Catering & Event Equipment Hire in Bulawayo",
+  theme: "We Make It Happen",
+  tagline: "We Make It Happen — Premier Decor, Catering & Event Equipment Hire in Bulawayo",
   address: "Mavondo Rd, Nkulumane 12, Bulawayo, Zimbabwe",
   phoneDisplay: "+263 775 126 513",
   phoneRaw: "263775126513",

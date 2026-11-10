@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { MessageCircle, ZoomIn, X, Sparkles, Filter } from "lucide-react";
+import { MessageCircle, ZoomIn, X, Flame } from "lucide-react";
 import { createWhatsAppLink } from "@/lib/constants";
 
 interface GalleryItem {
@@ -112,15 +112,15 @@ export default function Gallery() {
       : GALLERY_ITEMS.filter((item) => item.category === activeCategory);
 
   return (
-    <section id="gallery" className="py-20 sm:py-28 bg-[#FAF8F5] relative">
+    <section id="gallery" className="py-20 sm:py-28 bg-[#FAF7F5] relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-900 border border-amber-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
-            <Sparkles className="w-3.5 h-3.5 text-amber-700" />
-            Our Real Work in Bulawayo
+          <div className="inline-flex items-center gap-2 bg-[#F16738]/10 text-[#DC5424] border border-[#F16738]/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+            <Flame className="w-3.5 h-3.5 text-[#F16738] fill-[#F16738]" />
+            Our Real Work in Bulawayo • We Make It Happen
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#0A0A0A] tracking-tight">
             Event Showcase & Gallery
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -136,7 +136,7 @@ export default function Gallery() {
               onClick={() => setActiveCategory(cat)}
               className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
                 activeCategory === cat
-                  ? "bg-slate-900 text-white shadow-md"
+                  ? "bg-[#F16738] text-white shadow-brand font-bold"
                   : "bg-white text-slate-700 hover:bg-slate-100 border border-slate-200"
               }`}
             >
@@ -151,36 +151,36 @@ export default function Gallery() {
             <div
               key={item.id}
               onClick={() => setSelectedImage(item)}
-              className="group relative h-80 rounded-2xl overflow-hidden bg-slate-900 shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer"
+              className="group relative h-80 rounded-2xl overflow-hidden bg-[#0A0A0A] shadow-md hover:shadow-2xl hover:border-2 hover:border-[#F16738] transition-all duration-300 cursor-pointer"
             >
               <Image
                 src={item.image}
-                alt={`${item.title} - JS Events Bulawayo`}
+                alt={`${item.title} - JS Events We Make It Happen`}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-700 opacity-90 group-hover:opacity-100"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A]/95 via-[#0A0A0A]/30 to-transparent opacity-80 group-hover:opacity-90 transition-opacity" />
 
               {/* Badges */}
               <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                <span className="bg-slate-900/80 backdrop-blur text-amber-300 border border-amber-400/30 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                <span className="bg-[#0A0A0A]/85 backdrop-blur text-[#FF8257] border border-[#F16738]/40 text-[11px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                   {item.category}
                 </span>
-                <span className="p-2 rounded-full bg-white/20 backdrop-blur text-white group-hover:bg-amber-500 group-hover:text-slate-950 transition-colors">
+                <span className="p-2 rounded-full bg-white/20 backdrop-blur text-white group-hover:bg-[#F16738] group-hover:text-white transition-colors">
                   <ZoomIn className="w-4 h-4" />
                 </span>
               </div>
 
               {/* Title & Desc */}
               <div className="absolute bottom-4 left-4 right-4">
-                <h3 className="font-serif text-lg font-bold text-white group-hover:text-amber-300 transition-colors leading-snug">
+                <h3 className="font-serif text-lg font-bold text-white group-hover:text-[#FF8257] transition-colors leading-snug">
                   {item.title}
                 </h3>
                 <p className="text-xs text-slate-300 line-clamp-2 mt-1">
                   {item.description}
                 </p>
-                <div className="mt-3 flex items-center gap-1.5 text-xs text-amber-400 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="mt-3 flex items-center gap-1.5 text-xs text-[#F16738] font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span>Click to view details & book</span>
                 </div>
               </div>
@@ -191,17 +191,17 @@ export default function Gallery() {
         {/* Lightbox Modal */}
         {selectedImage && (
           <div
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in"
+            className="fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4 animate-in fade-in"
             onClick={() => setSelectedImage(null)}
           >
             <div
-              className="bg-slate-900 border border-amber-500/40 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95"
+              className="bg-[#0C0C0C] border border-[#F16738]/50 rounded-3xl max-w-3xl w-full overflow-hidden shadow-2xl relative animate-in zoom-in-95"
               onClick={(e) => e.stopPropagation()}
             >
               {/* Close button */}
               <button
                 onClick={() => setSelectedImage(null)}
-                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-slate-950/80 text-white hover:bg-amber-500 hover:text-slate-950 transition"
+                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-[#0A0A0A]/90 text-white hover:bg-[#F16738] transition"
                 aria-label="Close modal"
               >
                 <X className="w-5 h-5" />
@@ -219,10 +219,10 @@ export default function Gallery() {
 
               {/* Modal Body */}
               <div className="p-6 sm:p-8 text-white">
-                <div className="inline-block bg-amber-500 text-slate-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2">
+                <div className="inline-block bg-[#F16738] text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2 shadow-brand">
                   {selectedImage.category}
                 </div>
-                <h3 className="font-serif text-2xl sm:text-3xl font-black text-amber-300">
+                <h3 className="font-serif text-2xl sm:text-3xl font-black text-white">
                   {selectedImage.title}
                 </h3>
                 <p className="text-sm sm:text-base text-slate-300 mt-3 leading-relaxed">
@@ -231,7 +231,7 @@ export default function Gallery() {
 
                 <div className="mt-6 pt-6 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="text-xs text-slate-400">
-                    Want this exact look or catering setup for your event in Bulawayo?
+                    Want this exact look? <strong className="text-[#FF8257]">We Make It Happen!</strong>
                   </div>
                   <a
                     href={createWhatsAppLink(
