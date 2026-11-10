@@ -10,20 +10,16 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          orange: "#F16738", // Official Logo Primary Flame Orange
-          orangeDark: "#DC5424", // Official Logo Shadow Orange
-          orangeHover: "#E05523",
-          orangeLight: "#FF8257",
-          orangePastel: "#FFF4EF",
-          orangeTint: "#FFE8DF",
-          black: "#0A0A0A", // Official Logo Jet Black
-          dark: "#141414",
-          charcoal: "#1F1F1F",
-          slate: "#2A2A2A",
-          cream: "#FAF7F5",
-          white: "#FFFFFF",
-          emerald: "#10B981", // WhatsApp green
-          emeraldDark: "#059669",
+          gold: "#D4AF37",
+          goldDark: "#AA820A",
+          goldLight: "#F3E5AB",
+          dark: "#0F172A",
+          darker: "#090D16",
+          emerald: "#064E3B",
+          emeraldLight: "#10B981",
+          rose: "#BE123C",
+          cream: "#FAF8F5",
+          sand: "#F4EDE4",
         },
       },
       fontFamily: {
@@ -31,9 +27,8 @@ const config: Config = {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
       },
       boxShadow: {
-        brand: "0 10px 30px -10px rgba(241, 103, 56, 0.4)",
-        "brand-lg": "0 20px 45px -15px rgba(241, 103, 56, 0.55)",
-        dark: "0 15px 35px -10px rgba(0, 0, 0, 0.5)",
+        gold: "0 10px 30px -10px rgba(212, 175, 55, 0.35)",
+        'gold-lg': "0 20px 40px -15px rgba(212, 175, 55, 0.45)",
       },
     },
   },

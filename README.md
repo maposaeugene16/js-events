@@ -1,21 +1,8 @@
-# JS Events — "We Make It Happen"
+# JS Events — Premier Decor, Catering & Equipment Hire
 
-> **"We Make It Happen"**  
-> *"Any event that needs decor and catering, you can trust JS Events — we are the best!"*
+> **"Any event that needs decor and catering, you can trust JS Events — we are the best!"**
 
 Welcome to the official web application for **JS Events**, Bulawayo's leading decor, catering, and event equipment hire company based in **Mavondo Rd, Nkulumane 12, Bulawayo, Zimbabwe**.
-
----
-
-## 🎨 Brand Identity & Theme
-
-- **Official Slogan / Theme:** **"We Make It Happen"**
-- **Brand Colors (Sampled directly from the official logo):**
-  - **Flame Orange:** `#F16738` (Primary brand accent, energetic & welcoming)
-  - **Deep Terracotta / Shadow Orange:** `#DC5424` (Hover states & gradients)
-  - **Jet Black:** `#0A0A0A` (Executive luxury backdrop)
-  - **Crisp Pure White:** `#FFFFFF` (High contrast clarity)
-  - **WhatsApp Emerald:** `#10B981` (Direct instant communication)
 
 ---
 

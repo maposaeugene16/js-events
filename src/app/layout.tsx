@@ -17,12 +17,11 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://jsevents-bulawayo.com"),
-  title: "JS Events — We Make It Happen | Decor, Catering & Equipment Hire in Bulawayo",
+  title: "JS Events | Premier Decor, Catering & Equipment Hire in Bulawayo",
   description:
-    "JS Events (We Make It Happen) in Mavondo Rd, Nkulumane 12, Bulawayo delivers the finest decor and catering for weddings, lobola, birthdays, graduations, and memorials. Hire stretch tents, cabana tents, black plastic chairs, white chair bags, tables, and stainless chafing dishes. Call / WhatsApp +263 775 126 513.",
+    "JS Events in Mavondo Rd, Nkulumane 12, Bulawayo delivers the finest decor and catering for weddings, lobola, birthdays, graduations, and memorials. Hire stretch tents, cabanas, black plastic chairs, white chair bags, tables, chafing dishes, and more. Call / WhatsApp +263 775 126 513.",
   keywords: [
     "JS Events Bulawayo",
-    "We Make It Happen",
     "Events decor Bulawayo",
     "Catering services Bulawayo",
     "Nkulumane 12 events hire",
@@ -37,9 +36,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "JS Events" }],
   openGraph: {
-    title: "JS Events — We Make It Happen | Decor, Catering & Equipment Hire in Bulawayo",
+    title: "JS Events | Premier Decor, Catering & Equipment Hire in Bulawayo",
     description:
-      "Any event that needs decor and catering, trust JS Events — We Make It Happen! Weddings, Lobola, Birthdays, Graduations, Memorials, and full equipment hire.",
+      "Any event that needs decor and catering, trust JS Events — the best in Bulawayo! Weddings, Lobola, Birthdays, Graduations, Memorials, and complete equipment hire.",
     url: "https://jsevents-bulawayo.com",
     siteName: "JS Events Bulawayo",
     images: [
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
         url: "/images/wedding-gold-decor.jpg",
         width: 1200,
         height: 630,
-        alt: "JS Events — We Make It Happen",
+        alt: "JS Events Luxury Decor and Catering Bulawayo",
       },
     ],
     locale: "en_ZW",
@@ -66,7 +65,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-[#FAF7F5] text-slate-900 selection:bg-[#F16738] selection:text-white`}>
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased bg-[#FAF8F5] text-slate-900 selection:bg-amber-200 selection:text-amber-900`}>
         {children}
         <FloatingWhatsApp />
       </body>

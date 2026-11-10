@@ -7,15 +7,17 @@ import {
   Plus,
   Minus,
   CheckCircle,
+  Sparkles,
   ShoppingBag,
   Send,
-  Flame,
+  HelpCircle,
 } from "lucide-react";
 import { EQUIPMENT_HIRE_ITEMS, COMPANY_INFO, createWhatsAppLink } from "@/lib/constants";
 
 export default function EquipmentHire() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [cart, setCart] = useState<{ [itemId: string]: number }>({});
+  const [showSummary, setShowSummary] = useState(false);
 
   const categories = ["All", "Tents", "Chairs", "Linens & Covers", "Tables", "Catering Equipment", "Tableware"];
 
@@ -40,14 +42,14 @@ export default function EquipmentHire() {
   const totalItemsCount = Object.values(cart).reduce((a, b) => a + b, 0);
 
   const generateCartWhatsAppMessage = () => {
-    let msg = `Salibonani JS Events! I saw your 'We Make It Happen' website and would like to hire equipment in Bulawayo:\n\n`;
+    let msg = `Salibonani JS Events! I am looking to hire equipment in Bulawayo for my event:\n\n`;
     Object.entries(cart).forEach(([id, qty]) => {
       const item = EQUIPMENT_HIRE_ITEMS.find((it) => it.id === id);
       if (item && qty > 0) {
         msg += `• ${item.name} - Qty: ${qty}\n`;
       }
     });
-    msg += `\nPlease let me know availability and pricing for delivery in Bulawayo. Thank you!`;
+    msg += `\nPlease let me know availability and pricing for delivery/collection in Bulawayo. Thank you!`;
     return createWhatsAppLink(msg);
   };
 
@@ -56,11 +58,11 @@ export default function EquipmentHire() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#F16738]/10 text-[#DC5424] border border-[#F16738]/30 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
-            <Flame className="w-3.5 h-3.5 text-[#F16738] fill-[#F16738]" />
-            Equipment Hire & Rental • We Make It Happen
+          <div className="inline-flex items-center gap-2 bg-emerald-100 text-emerald-900 border border-emerald-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider mb-3">
+            <Sparkles className="w-3.5 h-3.5 text-emerald-700" />
+            Equipment Hire & Rental Services
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-[#0A0A0A] tracking-tight">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-serif font-black text-slate-900 tracking-tight">
             Premium Party & Event Equipment for Hire
           </h2>
           <p className="mt-4 text-base sm:text-lg text-slate-600 leading-relaxed">
@@ -80,7 +82,7 @@ export default function EquipmentHire() {
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-200 ${
                 selectedCategory === cat
-                  ? "bg-[#F16738] text-white shadow-brand font-bold"
+                  ? "bg-emerald-600 text-white shadow-md"
                   : "bg-slate-100 text-slate-700 hover:bg-slate-200"
               }`}
             >
@@ -96,7 +98,7 @@ export default function EquipmentHire() {
             return (
               <div
                 key={item.id}
-                className="bg-[#FAF7F5] rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-[#F16738]/50 transition-all duration-300 flex flex-col justify-between"
+                className="bg-[#FAF8F5] rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   {/* Image */}
@@ -108,14 +110,14 @@ export default function EquipmentHire() {
                       className="object-cover hover:scale-105 transition-transform duration-500"
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                     />
-                    <span className="absolute top-3 left-3 bg-[#0A0A0A]/85 backdrop-blur text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md border border-white/10">
+                    <span className="absolute top-3 left-3 bg-slate-900/80 backdrop-blur text-white text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded-md">
                       {item.category}
                     </span>
                   </div>
 
                   {/* Body */}
                   <div className="p-4 sm:p-5">
-                    <h3 className="font-serif font-bold text-lg text-[#0A0A0A] leading-snug mb-2">
+                    <h3 className="font-serif font-bold text-lg text-slate-900 leading-snug mb-2">
                       {item.name}
                     </h3>
                     <p className="text-xs text-slate-600 leading-relaxed mb-4">
@@ -125,7 +127,7 @@ export default function EquipmentHire() {
                     <div className="space-y-1.5 mb-4">
                       {item.features.map((feat, idx) => (
                         <div key={idx} className="flex items-center gap-1.5 text-[11px] text-slate-700">
-                          <CheckCircle className="w-3.5 h-3.5 text-[#F16738] shrink-0" />
+                          <CheckCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                           <span>{feat}</span>
                         </div>
                       ))}
@@ -155,18 +157,18 @@ export default function EquipmentHire() {
                         title="Increase"
                         aria-label="Increase quantity"
                       >
-                        <Plus className="w-3.5 h-3.5 text-[#F16738]" />
+                        <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
 
                     {/* Direct Item WhatsApp Button */}
                     <a
                       href={createWhatsAppLink(
-                        `Salibonani JS Events! I saw your 'We Make It Happen' hire list and want to book ${item.name} in Bulawayo.`
+                        `Salibonani JS Events! I would like to inquire about hiring ${item.name} in Bulawayo.`
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs bg-[#0A0A0A] hover:bg-[#F16738] text-white font-semibold px-3 py-2 rounded-lg transition shadow-sm"
+                      className="inline-flex items-center gap-1 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-3 py-2 rounded-lg transition"
                       title="Hire via WhatsApp"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
@@ -181,13 +183,13 @@ export default function EquipmentHire() {
 
         {/* Floating Cart Banner when items are selected */}
         {totalItemsCount > 0 && (
-          <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 w-11/12 max-w-2xl bg-[#0A0A0A] text-white p-4 rounded-2xl shadow-2xl border-2 border-[#F16738] flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-bottom-5">
+          <div className="fixed bottom-24 left-1/2 -translate-x-1/2 z-40 w-11/12 max-w-2xl bg-slate-950 text-white p-4 rounded-2xl shadow-2xl border-2 border-amber-400 flex flex-col sm:flex-row items-center justify-between gap-4 animate-in slide-in-from-bottom-5">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-[#F16738] rounded-xl text-white font-black shadow-brand">
+              <div className="p-2.5 bg-amber-500 rounded-xl text-slate-950 font-black">
                 <ShoppingBag className="w-5 h-5" />
               </div>
               <div>
-                <div className="text-sm font-bold text-[#FF8257]">
+                <div className="text-sm font-bold text-amber-300">
                   {totalItemsCount} Equipment Item(s) Selected
                 </div>
                 <div className="text-xs text-slate-300">
@@ -201,7 +203,7 @@ export default function EquipmentHire() {
                 href={generateCartWhatsAppMessage()}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-500 text-white font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-md transition"
+                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white font-bold px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-md transition"
               >
                 <Send className="w-4 h-4" />
                 <span>Request List on WhatsApp</span>
@@ -217,21 +219,21 @@ export default function EquipmentHire() {
         )}
 
         {/* Equipment Guarantee Banner */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 p-8 rounded-3xl bg-[#0C0C0C] text-white border border-[#F16738]/30">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6 p-8 rounded-3xl bg-slate-900 text-white border border-amber-500/20">
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#F16738]/20 text-[#FF8257] flex items-center justify-center shrink-0 font-bold text-lg border border-[#F16738]/40">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 font-bold text-lg">
               ✨
             </div>
             <div>
-              <h4 className="font-bold text-base text-[#FF8257]">Spotless Clean Guarantee</h4>
+              <h4 className="font-bold text-base text-amber-300">Spotless Clean Guarantee</h4>
               <p className="text-xs text-slate-300 mt-1 leading-relaxed">
-                Every single black chair, white chair bag, table, and chafing dish is thoroughly washed, sanitized, and inspected before delivery.
+                Every single black chair, white chair bag, table, and chafing dish is rigorously washed, sanitized, and inspected before delivery.
               </p>
             </div>
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-bold text-lg border border-emerald-500/30">
+            <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0 font-bold text-lg">
               🚚
             </div>
             <div>
@@ -243,11 +245,11 @@ export default function EquipmentHire() {
           </div>
 
           <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-xl bg-[#F16738]/20 text-[#FF8257] flex items-center justify-center shrink-0 font-bold text-lg border border-[#F16738]/40">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 font-bold text-lg">
               💬
             </div>
             <div>
-              <h4 className="font-bold text-base text-[#FF8257]">Instant WhatsApp Booking</h4>
+              <h4 className="font-bold text-base text-amber-300">Instant WhatsApp Booking</h4>
               <p className="text-xs text-slate-300 mt-1 leading-relaxed">
                 Need urgent extra chairs or a last minute cabana tent? Reach our team directly on WhatsApp for immediate response.
               </p>
