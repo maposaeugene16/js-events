@@ -233,30 +233,33 @@ export default function Gallery() {
     return () => clearInterval(timer);
   }, [isPlaying, lightboxOpen, activePhotos.length]);
 
-  // Keep active thumbnail visible in scroll
+  // Keep active thumbnail visible inside its container ONLY without shifting the page/window
   useEffect(() => {
-    if (thumbnailStripRef.current) {
-      const activeThumb = thumbnailStripRef.current.children[currentIndex] as HTMLElement;
-      if (activeThumb) {
-        activeThumb.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "center",
-        });
-      }
-    }
+    const container = thumbnailStripRef.current;
+    if (!container) return;
+    const activeThumb = container.children[currentIndex] as HTMLElement | undefined;
+    if (!activeThumb) return;
+
+    // Center active thumbnail within container without touching page scroll
+    const targetScroll =
+      activeThumb.offsetLeft -
+      container.clientWidth / 2 +
+      activeThumb.clientWidth / 2;
+
+    container.scrollTo({
+      left: Math.max(0, targetScroll),
+      behavior: "smooth",
+    });
   }, [currentIndex]);
 
-  // Keyboard navigation
+  // Keyboard navigation ONLY when fullscreen lightbox is open so page scrolling is never affected
   useEffect(() => {
+    if (!lightboxOpen) return;
+
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowRight") nextSlide();
       if (e.key === "ArrowLeft") prevSlide();
       if (e.key === "Escape") setLightboxOpen(false);
-      if (e.key === " " && !lightboxOpen) {
-        e.preventDefault();
-        setIsPlaying((p) => !p);
-      }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
