@@ -38,17 +38,17 @@ export default function CateringMenu() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           <div className="relative h-64 rounded-2xl overflow-hidden shadow-md group">
             <Image
-              src="/images/catering-buffet-chefs.png"
-              alt="Professional chefs serving hot catering buffet Bulawayo"
+              src="/images/traditional-catering-crew.jpg"
+              alt="JS Events catering team serving traditional roora feast in Bulawayo"
               fill
               className="object-cover group-hover:scale-105 transition duration-500"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex items-end p-5">
               <div>
                 <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">
-                  Professional Catering
+                  Traditional Feasts & Roora
                 </span>
-                <h4 className="text-white font-serif text-lg font-bold">Hot Chafing Dish Buffets</h4>
+                <h4 className="text-white font-serif text-lg font-bold">Authentic Cultural Catering</h4>
               </div>
             </div>
           </div>
