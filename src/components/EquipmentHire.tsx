@@ -39,6 +39,18 @@ export default function EquipmentHire() {
     });
   };
 
+  const setQuantity = (id: string, value: number) => {
+    setCart((prev) => {
+      const next = Math.max(0, Math.floor(value));
+      if (next === 0) {
+        const copy = { ...prev };
+        delete copy[id];
+        return copy;
+      }
+      return { ...prev, [id]: next };
+    });
+  };
+
   const totalItemsCount = Object.values(cart).reduce((a, b) => a + b, 0);
 
   const generateCartWhatsAppMessage = () => {
@@ -46,7 +58,7 @@ export default function EquipmentHire() {
     Object.entries(cart).forEach(([id, qty]) => {
       const item = EQUIPMENT_HIRE_ITEMS.find((it) => it.id === id);
       if (item && qty > 0) {
-        msg += `• ${item.name} - Qty: ${qty}\n`;
+        msg += `• ${item.name} - Qty: ${qty.toLocaleString()}\n`;
       }
     });
     msg += `\nPlease let me know availability and pricing for delivery/collection in Bulawayo. Thank you!`;
@@ -135,25 +147,56 @@ export default function EquipmentHire() {
                   </div>
                 </div>
 
-                {/* Footer Action */}
-                <div className="p-4 pt-0 border-t border-slate-200/60 mt-auto">
-                  <div className="flex items-center justify-between gap-2 pt-3">
-                    {/* Quantity Selector */}
-                    <div className="flex items-center border border-slate-300 rounded-lg bg-white overflow-hidden shadow-sm">
+                {/* Footer Action with Direct Type Quantity Input */}
+                <div className="p-4 pt-3 border-t border-slate-200/60 mt-auto bg-white/50">
+                  <div className="flex items-center justify-between gap-2 mb-1.5">
+                    <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500">
+                      Quantity:
+                    </span>
+                    <span className="text-[10px] text-slate-400">
+                      Type exact or use +/-
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between gap-2">
+                    {/* Direct Editable Quantity Selector */}
+                    <div className="flex items-center border border-slate-300 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500 rounded-lg bg-white overflow-hidden shadow-sm">
                       <button
+                        type="button"
                         onClick={() => updateQuantity(item.id, -1)}
-                        className="px-2.5 py-1.5 hover:bg-slate-100 text-slate-600 transition"
+                        className="px-2 py-1.5 hover:bg-slate-100 text-slate-600 transition"
                         title="Decrease"
                         aria-label="Decrease quantity"
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
-                      <span className="px-2.5 py-1 text-xs font-bold text-slate-800 min-w-[28px] text-center">
-                        {quantity}
-                      </span>
+
+                      {/* Direct Numeric Input Field */}
+                      <input
+                        type="number"
+                        min="0"
+                        max="50000"
+                        placeholder="0"
+                        value={quantity === 0 ? "" : quantity}
+                        onChange={(e) => {
+                          const val = e.target.value.trim();
+                          if (val === "") {
+                            setQuantity(item.id, 0);
+                          } else {
+                            const num = parseInt(val, 10);
+                            if (!isNaN(num)) {
+                              setQuantity(item.id, Math.max(0, num));
+                            }
+                          }
+                        }}
+                        className="w-14 sm:w-16 text-center text-xs sm:text-sm font-bold text-slate-900 bg-white focus:outline-none focus:bg-emerald-50/40 py-1 border-x border-slate-200 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                        aria-label={`Enter exact quantity for ${item.name}`}
+                      />
+
                       <button
+                        type="button"
                         onClick={() => updateQuantity(item.id, 1)}
-                        className="px-2.5 py-1.5 hover:bg-slate-100 text-slate-600 transition"
+                        className="px-2 py-1.5 hover:bg-slate-100 text-slate-600 transition"
                         title="Increase"
                         aria-label="Increase quantity"
                       >
@@ -161,20 +204,42 @@ export default function EquipmentHire() {
                       </button>
                     </div>
 
-                    {/* Direct Item WhatsApp Button */}
+                    {/* Direct Item WhatsApp Button with dynamic quantity */}
                     <a
                       href={createWhatsAppLink(
-                        `Salibonani JS Events! I would like to inquire about hiring ${item.name} in Bulawayo.`
+                        quantity > 0
+                          ? `Salibonani JS Events! I would like to inquire about hiring ${quantity} x ${item.name} in Bulawayo.`
+                          : `Salibonani JS Events! I would like to inquire about hiring ${item.name} in Bulawayo.`
                       )}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-3 py-2 rounded-lg transition"
+                      className="inline-flex items-center gap-1 text-xs bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-3 py-2 rounded-lg transition shrink-0 shadow-sm"
                       title="Hire via WhatsApp"
                     >
                       <MessageCircle className="w-3.5 h-3.5" />
-                      <span>Hire</span>
+                      <span>{quantity > 0 ? `Hire (${quantity})` : "Hire"}</span>
                     </a>
                   </div>
+
+                  {/* Fast Bulk Add Shortcuts for High-Volume Items (Chairs, Covers, Tableware) */}
+                  {(item.id === "black-plastic-chairs" || item.id === "white-chair-bags" || item.id === "cutlery-crockery") && (
+                    <div className="flex items-center justify-between gap-1 mt-2 pt-2 border-t border-slate-100">
+                      <span className="text-[10px] text-slate-400 font-medium">Quick add:</span>
+                      <div className="flex items-center gap-1">
+                        {[50, 100, 200, 500].map((preset) => (
+                          <button
+                            key={preset}
+                            type="button"
+                            onClick={() => setQuantity(item.id, (cart[item.id] || 0) + preset)}
+                            className="text-[10px] font-bold bg-slate-100 hover:bg-emerald-100 hover:text-emerald-800 text-slate-600 px-1.5 py-0.5 rounded border border-slate-200 transition"
+                            title={`Add +${preset} ${item.name}`}
+                          >
+                            +{preset}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
             );
@@ -190,7 +255,7 @@ export default function EquipmentHire() {
               </div>
               <div>
                 <div className="text-sm font-bold text-amber-300">
-                  {totalItemsCount} Equipment Item(s) Selected
+                  {totalItemsCount.toLocaleString()} Equipment Item(s) Selected
                 </div>
                 <div className="text-xs text-slate-300">
                   Ready to send quotation list directly to JS Events WhatsApp
